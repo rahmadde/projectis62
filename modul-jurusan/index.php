@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project IS62</title>
+    <title>Data Jurusan</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/all.css">
 </head>
@@ -15,10 +15,10 @@
         <div class="card">
             <div class="card-header text-center">
                 <h3 class="float-start">
-                    Sistem Informasi Mahasiswa
+                    Data Jurusan
                 </h3>
                 <span>
-                    <a href="" class="btn btn-primary float-end">
+                    <a href="form.php" class="btn btn-primary float-end">
                         <i class="fa-solid fa-circle-plus"></i> Tambah Data
                     </a>
                 </span>
@@ -34,15 +34,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            #1. koneksikan file ini
+                            include("../koneksi.php");
+
+                            #2. menulis query
+                            $tampil = "SELECT * FROM jurusans";
+
+                            #3. jalankan query
+                            $proses = mysqli_query($koneksi,$tampil);
+
+                            #4. looping data dari database
+                            $nomor = 1;
+                            foreach($proses as $data){
+                        ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                            <th scope="row"><?=$nomor++?></th>
+                            <td><?=$data['kode']?></td>
+                            <td><?=$data['jurusan']?></td>
                             <td>
                                 <a class="btn btn-info btn-sm" href=""><i class="fa fa-pen-to-square"></i></a>
                                 <a class="btn btn-danger btn-sm" href=""><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
+                        <?php
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
